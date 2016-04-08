@@ -1,0 +1,57 @@
+server {
+    listen       80;
+    server_name  www.###DOMAIN###;
+    return       301 http://###DOMAIN###$request_uri;
+}
+
+
+server {
+        server_name ###DOMAIN###;
+        root /home/###ACCOUNT_NAME###/public_html;
+        index index.php;
+
+        location = /favicon.ico {
+                log_not_found off;
+                access_log off;
+        }
+
+        location = /robots.txt {
+                allow all;
+                log_not_found off;
+                access_log off;
+        }
+
+        location / {
+                # This is cool because no php is touched for static content.
+                # include the "?$args" part so non-default permalinks doesn't break when using query string
+                try_files $uri $uri/ /index.php?$args;
+        }
+
+                location ~ \.php$ {
+                        root           /home/###ACCOUNT_NAME###/public_html/;
+                        fastcgi_pass   127.0.0.1:9000;
+                        fastcgi_index  index.php;
+                        fastcgi_split_path_info ^(.+\.php)(.*)$;
+                        fastcgi_param SCRIPT_FILENAME   $document_root$fastcgi_script_name;
+                        include        fastcgi_params;
+                }
+
+
+        location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+                expires max;
+                log_not_found off;
+        }
+
+                location ~ /index.php/
+                {
+                  include fastcgi_params;
+                  fastcgi_index  index.php;
+                  fastcgi_param  SCRIPT_FILENAME  /home/###ACCOUNT_NAME###/public_html/index.php;
+                  fastcgi_param  REQUEST_URI      $request_uri;
+                  fastcgi_param  QUERY_STRING     $query_string;
+                  fastcgi_param  REQUEST_METHOD   $request_method;
+                  fastcgi_param  CONTENT_TYPE     $content_type;
+                  fastcgi_param  CONTENT_LENGTH   $content_length;
+                  fastcgi_pass   127.0.0.1:9000;
+                }
+}
