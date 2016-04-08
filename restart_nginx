@@ -1,0 +1,3 @@
+#!/bin/sh
+/etc/init.d/php-fpm restart
+/etc/init.d/nginx restart
