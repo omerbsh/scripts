@@ -38,8 +38,11 @@ def create_acct(domain_name):
         if not os.path.isdir(dir_path):
             #create new user
             cmd = os.system("adduser -s /sbin/nologin "+ account_name)
-
-            #create account home directory , and secondery directories
+	    # write new account to accounts list
+	    accounts_lst = open('accounts_list', 'a')
+	    accounts_lst.write(domain_name + " " + account_name  + "\n")
+            accounts_lst.close()
+	    #create account home directory , and secondery directories
             os.makedirs(dir_path + "/public_html")
             os.makedirs(dir_path + "/access_logs")
             #check if the user creation faild
@@ -51,8 +54,7 @@ def create_acct(domain_name):
             print("the account  %s  has been created. " % account_name )
             os.system("chmod 755 /home/%s" % account_name)
             os.system("service nginx restart")
-            os.system("service php-fpm restart")
-
+            os.system("service php-fpm restart") 
             return account_name
         else:
             print("this folder is exists: " + account_name)
