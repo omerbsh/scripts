@@ -9,7 +9,10 @@ import re
 
 import lib.pp_validation
 from lib.pp_create_nginx_conf import create_nginx_conf
+<<<<<<< HEAD
 from lib.pp_create_nginx_conf import create_phpfpm_conf
+=======
+>>>>>>> 70a7f67ad1f345b514cc13ea446dab3fcd35f1e3
 
 def create_acct(domain_name):
         #account name validation
@@ -39,11 +42,16 @@ def create_acct(domain_name):
         if not os.path.isdir(dir_path):
             #create new user
             cmd = os.system("adduser -s /sbin/nologin "+ account_name)
+<<<<<<< HEAD
 	    # write new account to accounts list
 	    accounts_lst = open('accounts_list', 'a')
 	    accounts_lst.write(domain_name + " " + account_name  + "\n")
             accounts_lst.close()
 	    #create account home directory , and secondery directories
+=======
+
+            #create account home directory , and secondery directories
+>>>>>>> 70a7f67ad1f345b514cc13ea446dab3fcd35f1e3
             os.makedirs(dir_path + "/public_html")
             os.makedirs(dir_path + "/access_logs")
             #check if the user creation faild
@@ -55,7 +63,12 @@ def create_acct(domain_name):
             print("the account  %s  has been created. " % account_name )
             os.system("chmod 755 /home/%s" % account_name)
             os.system("service nginx restart")
+<<<<<<< HEAD
             os.system("service php-fpm restart") 
+=======
+            os.system("service php-fpm restart")
+
+>>>>>>> 70a7f67ad1f345b514cc13ea446dab3fcd35f1e3
             return account_name
         else:
             print("this folder is exists: " + account_name)
@@ -70,9 +83,15 @@ domain_name = raw_input("Please enter the main domain of this account: \n")
 if lib.pp_validation.domain_validation(domain_name):
     #call to create acct function
     account_name = create_acct(domain_name)
+<<<<<<< HEAD
     if create_acct is not False:
         create_nginx_conf(account_name , domain_name)
         create_phpfpm_conf(account_name)
+=======
+
+    if create_acct is not False:
+        create_nginx_conf(account_name , domain_name)
+>>>>>>> 70a7f67ad1f345b514cc13ea446dab3fcd35f1e3
     else:
 		print "Error with ngnix configuration file creation"
 		exit
