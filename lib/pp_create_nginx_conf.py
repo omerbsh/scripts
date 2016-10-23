@@ -16,12 +16,29 @@ def create_nginx_conf(account_name , domain_name):
     new_conf_file_path = "/etc/nginx/conf.d/" + account_name + ".conf"
     new_conf_file = open(new_conf_file_path , "w")
 
+    conf_file.close()
     #write data into new file
     if new_conf_file.write(data):
         #restart nginx and return true
         os.system("service nginx restart")
-    	return True
+        return True
     else:
-    	return False
+        return False
 
+def create_phpfpm_conf(account_name):
+    #open php-fpm conf file template
+    conf_file = open("/scripts/templates/phpfpm_conf")
+    data = conf_file.read();
+    #replace vars
+    data = data.replace("###ACCOUNT_NAME###" , account_name)
+    #new file path
+    new_conf_file_path = "/etc/php-fpm.d/" + account_name + ".conf"
+    new_conf_file = open(new_conf_file_path , "w")
     conf_file.close()
+    #write data into new file
+    if new_conf_file.write(data):
+        #restart nginx and return true
+        os.system("service php-fpm restart")
+        return True
+    else:
+        return False

@@ -9,6 +9,7 @@ import re
 
 import lib.pp_validation
 from lib.pp_create_nginx_conf import create_nginx_conf
+from lib.pp_create_nginx_conf import create_phpfpm_conf
 
 def create_acct(domain_name):
         #account name validation
@@ -69,9 +70,9 @@ domain_name = raw_input("Please enter the main domain of this account: \n")
 if lib.pp_validation.domain_validation(domain_name):
     #call to create acct function
     account_name = create_acct(domain_name)
-
     if create_acct is not False:
         create_nginx_conf(account_name , domain_name)
+        create_phpfpm_conf(account_name)
     else:
 		print "Error with ngnix configuration file creation"
 		exit
