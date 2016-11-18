@@ -14,9 +14,7 @@ from lib.pp_create_nginx_conf import create_phpfpm_conf
 def create_acct(domain_name):
         #account name validation
         domain_string = re.split("[^a-zA-Z0-9]*",domain_name)
-        
         account_name = ""
-        
         for acct in domain_string:
                 account_name += acct
                 
@@ -68,7 +66,6 @@ def create_acct(domain_name):
             return False
 
 domain_name = raw_input("Please enter the main domain of this account: \n")
-
 
 if lib.pp_validation.domain_validation(domain_name):
     #call to create acct function
