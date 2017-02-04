@@ -32,7 +32,7 @@ def create_phpfpm_conf(account_name):
     #replace vars
     data = data.replace("###ACCOUNT_NAME###" , account_name)
     #new file path
-    new_conf_file_path = "/etc/php-fpm.d/" + account_name + ".conf"
+    new_conf_file_path = "/etc/php/7.1/fpm/pool.d/" + account_name + ".conf"
     print new_conf_file_path
     exit
     new_conf_file = open(new_conf_file_path , "w")

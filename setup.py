@@ -19,6 +19,7 @@ def setup_software(conf_file_path):
 			print('create configuration path for Ubuntu')
 			Config.set('configPath','nginx_site_available','/etc/nginx/sites-available/')
 			Config.set('configPath','nginx_site_enabled','/etc/nginx/sites-enabled/')
+			Config.set('configPath','phpfpm_conf','/etc/nginx/sites-enabled/')
 		else:
 			print('create configuration path for CentOS')
 			print("can't find Nginx configuration folder path.")
