@@ -21,7 +21,7 @@ def create_acct(domain_name):
     account_name = ""
     for acct in domain_string:
             account_name += acct
-            
+    
     if re.match("^[0-9a-zA-Z]+$" , account_name) == False:
         print "this account name is not valid (have to be with letters and numbers only"
         exit
