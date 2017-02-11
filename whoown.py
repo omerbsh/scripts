@@ -6,7 +6,7 @@ Description: create new account
 """
 import sys
 
-accounts_file = "accounts_list"
+accounts_file = "account_domains"
 input_domain = sys.argv[1]
 
 with open( accounts_file ) as f:
